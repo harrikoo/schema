@@ -3,7 +3,7 @@ import { Storage } from '@ionic/storage';
 import { Platform } from '@ionic/angular';
 import { StudyTasksService } from '../services/study-tasks.service';
 import { UuidService } from '../services/uuid.service';
-import { Http } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
 import { HTTP } from '@ionic-native/http/ngx';
 
 @Injectable({
@@ -11,7 +11,7 @@ import { HTTP } from '@ionic-native/http/ngx';
 })
 export class SurveyDataService {
 
-  constructor(private http: Http,
+  constructor(private http: HttpClient,
     private http2: HTTP,
     private storage: Storage,
     private platform: Platform,
