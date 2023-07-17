@@ -159,7 +159,7 @@ export class SurveyDataService {
       .post(postURL, bodyData)
       .subscribe(
         data => {
-          if (data.status === 200) {
+          if (data) {
             resolve(true)
           } else {
             resolve(false)

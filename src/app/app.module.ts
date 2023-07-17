@@ -15,7 +15,6 @@ import { FormsModule } from '@angular/forms';
 /* plugins */
 import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
 import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
-import { HttpModule } from '@angular/http';
 import { IonicStorageModule } from '@ionic/storage';
 import { HTTP } from '@ionic-native/http/ngx';
 import { FileTransfer } from '@ionic-native/file-transfer/ngx';
@@ -34,7 +33,6 @@ export function LanguageLoader(http: HttpClient) {
   entryComponents: [],
   imports: [
     BrowserModule, 
-    HttpModule, 
     ChartsModule, 
     IonicModule.forRoot(), 
     IonicStorageModule.forRoot(), 
