@@ -223,18 +223,19 @@ export class Tab1Page {
     this.loadingService.isCaching = false
     this.loadingService.present(this.translations["label_loading"])
 
-    this.surveyDataService.getRemoteData(url).then(data => {
+      this.surveyDataService.getRemoteData(url).then((data: any) => {
   
       // check if the data received from the URL contains JSON properties/modules
       // in order to determine if it's a schema study before continuing
-      let validStudy = false
+	let validStudy = false
+	console.log("Data2: ",data)
       try {
         // checks if the returned text is parseable as JSON, and whether it contains
         // some of the key fields used by schema so it can determine whether it is
         // actually a schema study URL
-        validStudy = JSON.parse(data['data']).properties !== undefined
-                  && JSON.parse(data['data']).modules !== undefined
-                  && JSON.parse(data['data']).properties.study_id !== undefined
+        validStudy = data.properties !== undefined
+                  && data.modules !== undefined
+                  && data.properties.study_id !== undefined
       } catch(e) {
         validStudy = false
       }
@@ -284,7 +285,8 @@ export class Tab1Page {
           }, {
             text: this.translations["btn_enrol"],
             handler: response => {
-              this.attemptToDownloadStudy(response.url, false)
+		//              this.attemptToDownloadStudy(response.url, false)
+		this.attemptToDownloadStudy("https://kir-dataman.it.tuni.fi/perskischema.json",false)
             }
           }
         ]
@@ -336,7 +338,7 @@ export class Tab1Page {
     this.hideEnrolOptions = true
 
     // convert received data to JSON object
-    this.study = JSON.parse(data['data']);
+    this.study = data;
 
     // set the enrolled date
     this.storage.set('enrolment-date', new Date())

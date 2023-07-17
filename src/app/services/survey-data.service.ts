@@ -22,20 +22,32 @@ export class SurveyDataService {
    * Downloads a survey from a remote URL
    * @param surveyURL The web URL where a survey is hosted.
    */
-  getRemoteData(surveyURL: string) {
-  return new Promise(resolve => {
-    this.http2.setRequestTimeout(7)
-    this.http2.post(surveyURL, {seed: 'f2d91e73'}, {}).then(data => {
-        resolve(data)
-      }).catch(error => {
-        resolve(error)
-      });
-    });
-  }
+    getRemoteData(surveyURL: string) {
+	return new Promise(resolve => {
+	    /*  this.http2.setRequestTimeout(7)
+		this.http2.get(surveyURL, {}, {}).then(data => {
+		resolve(data)
+		}).catch(error => {
+		resolve(error)
+		});
+		});*/
+	    this.http.get(surveyURL).subscribe({
+		next: data => {
+		    console.log("Data received: ",JSON.stringify(data))
+		    resolve(JSON.parse(JSON.stringify(data)))
+		}
+		,
+		error: error => {
+		    console.error("Error occurred: ",error)
+		    resolve(error)
+		}
+	    })
+	}
+			  )}
 
-  async saveToLocalStorage(key, data) {
-    this.storage.set(key, data)
-  }
+    async saveToLocalStorage(key, data) {
+	this.storage.set(key, data)
+    }
 
   /**
    * Attempts to submit a survey response to the server, and if unsuccessful saves it for later attempts
