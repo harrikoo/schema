@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Router, NavigationStart } from '@angular/router';
-import { Storage } from '@ionic/storage';
+import { Storage } from '@ionic/storage-angular';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { AlertController } from '@ionic/angular';
 import { Platform } from '@ionic/angular';
@@ -90,7 +90,10 @@ export class Tab1Page {
       this.statusBar.styleLightContent()
       this.statusBar.backgroundColorByHexString('#0F2042')
 
-      // need to subscribe to this event in order
+	// Need to create storage before use
+	this.storage.create()
+
+	// need to subscribe to this event in order
       // to ensure that the page will refresh every
       // time it is navigated to because ionViewWillEnter()
       // is not called when navigating here from other pages

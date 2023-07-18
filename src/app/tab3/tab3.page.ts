@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Storage } from '@ionic/storage';
+import { Storage } from '@ionic/storage-angular';
 import { NavController, AlertController } from '@ionic/angular';
 import { NotificationsService } from '../services/notifications.service';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Storage } from '@ionic/storage';
+import { Storage } from '@ionic/storage-angular';
 import { Platform } from '@ionic/angular';
 import { StudyTasksService } from '../services/study-tasks.service';
 import { UuidService } from '../services/uuid.service';
