@@ -285,8 +285,7 @@ export class Tab1Page {
           }, {
             text: this.translations["btn_enrol"],
             handler: response => {
-		//              this.attemptToDownloadStudy(response.url, false)
-		this.attemptToDownloadStudy("https://kir-dataman.it.tuni.fi/perskischema.json",false)
+		this.attemptToDownloadStudy(response.url, false)
             }
           }
         ]
