@@ -46,7 +46,7 @@
     "ionic-cache-src": "^0.1.1",
     "moment": "^2.24.0",
     "native-run": "^1.7.2",
-    "ng2-charts": "^2.2.4",
+    "ng2-charts": "^2.4.3",
     "rm": "0.1.8",
     "rxjs": "~6.5.1",
     "sass-loader": "^7.1.0",
