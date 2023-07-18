@@ -56,7 +56,7 @@
   </div>
 </ion-content>
 
-<ion-footer [hidden]="hideEnrolOptions">
+<ion-footer *ngIf="hideEnrolOptions === false">
   <p *ngIf="darkMode" style="color:#ffffff;" class="enrolment-text">
     To begin, enrol in a study:
   </p>
