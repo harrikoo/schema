@@ -16,7 +16,7 @@ import * as moment from 'moment';
 })
 export class SurveyPage implements OnInit {
 
-  @ViewChild(IonContent, {static: false}) content: IonContent
+  @ViewChild(IonContent) content: IonContent
 
   // the text to display as submit button label
   submit_text: string = "Submit"
