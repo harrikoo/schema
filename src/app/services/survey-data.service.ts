@@ -151,9 +151,15 @@ export class SurveyDataService {
             }
           }
           this.attemptHttpPost(data.post_url, bodyData).then((postSuccessful) => {
-            if (postSuccessful) {
-              this.storage.remove(pendingKey)
-            }
+              if (postSuccessful) {
+		  this.storage.remove(pendingKey)
+		  // console.log("uploadPendingData post succesful!")
+              }
+	      else
+	      {
+		  // console.log("uploadPendingData post not succesful: ", bodyData)
+	      }
+		  
           });
         });
       });
@@ -165,22 +171,23 @@ export class SurveyDataService {
    * @param postURL The URL for a study's data collection server
    * @param bodyData The data to send to that server
    */
-  attemptHttpPost(postURL, bodyData) {
-    return new Promise(resolve => {
-      this.http
-      .post(postURL, bodyData)
-      .subscribe(
-        data => {
-          if (data) {
-            resolve(true)
-          } else {
-            resolve(false)
-          }
-        },
-        err => {
-          resolve(false)
-        }
-      );
-    });
-  }
+    attemptHttpPost(postURL, bodyData) {
+	return new Promise(resolve => {
+	    this.http
+		.post(postURL, bodyData)
+		.subscribe(
+		    data => {
+			//          if (data) {
+			// console.log("attemptHttpPost succesful!")
+			resolve(true)
+			//} else {
+			//  resolve(false)
+			// }
+		    },
+		    err => {
+			resolve(false)
+		    }
+		);
+	});
+    }
 }
