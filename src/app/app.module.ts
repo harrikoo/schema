@@ -29,34 +29,34 @@ export function LanguageLoader(http: HttpClient) {
 }
 
 @NgModule({
-  declarations: [AppComponent],
-  entryComponents: [],
-  imports: [
-    BrowserModule, 
-    ChartsModule, 
-    IonicModule.forRoot(), 
-    IonicStorageModule.forRoot(), 
-    AppRoutingModule,
-    HttpClientModule,
-    TranslateModule.forRoot({
-      loader: {
-        provide: TranslateLoader,
-        useFactory: (LanguageLoader),
-        deps: [HttpClient]
-      }
-    })],
-  providers: [
-    StatusBar,
-    SplashScreen,
-    BarcodeScanner,
-    LocalNotifications,
-    InAppBrowser,
-    File,
-    FileTransfer,
-    HTTP,
-    FormsModule,
-    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
-  ],
-  bootstrap: [AppComponent]
+    declarations: [AppComponent],
+    imports: [
+        BrowserModule,
+        ChartsModule,
+        IonicModule.forRoot(),
+        IonicStorageModule.forRoot(),
+        AppRoutingModule,
+        HttpClientModule,
+        TranslateModule.forRoot({
+            loader: {
+                provide: TranslateLoader,
+                useFactory: (LanguageLoader),
+                deps: [HttpClient]
+            }
+        })
+    ],
+    providers: [
+        StatusBar,
+        SplashScreen,
+        BarcodeScanner,
+        LocalNotifications,
+        InAppBrowser,
+        File,
+        FileTransfer,
+        HTTP,
+        FormsModule,
+        { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
+    ],
+    bootstrap: [AppComponent]
 })
 export class AppModule {}
