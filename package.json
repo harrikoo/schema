@@ -44,7 +44,7 @@
     "core-js": "^2.5.4",
     "io": "1.0.0",
     "ionic-cache-src": "^0.1.1",
-    "moment": "^2.24.0",
+    "moment": "^2.29.4",
     "native-run": "^1.7.2",
     "ng2-charts": "^2.4.3",
     "rm": "0.1.8",
