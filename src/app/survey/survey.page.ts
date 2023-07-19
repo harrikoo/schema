@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild, NgZone } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
 import { Storage } from '@ionic/storage';
-import { StatusBar } from '@ionic-native/status-bar/ngx';
+import { StatusBar, Style } from '@capacitor/status-bar';
 import { StudyTasksService } from '../services/study-tasks.service';
 import { SurveyDataService } from '../services/survey-data.service';
 import { NavController, IonContent, ToastController } from '@ionic/angular';
@@ -49,7 +49,7 @@ export class SurveyPage implements OnInit {
 
   constructor(private route: ActivatedRoute,
     private storage: Storage,
-    private statusBar: StatusBar,
+	      //    private statusBar: StatusBar,
     private domSanitizer: DomSanitizer,
     private navController: NavController,
     private studyTasksService: StudyTasksService,
@@ -63,9 +63,10 @@ export class SurveyPage implements OnInit {
    * Initialises the survey and displays it on the screen
    */
   ngOnInit() {
-    // set statusBar to visible on Android
-    this.statusBar.styleLightContent()
-    this.statusBar.backgroundColorByHexString('#0F2042')
+      // set statusBar to visible on Android
+      StatusBar.show()
+      StatusBar.setStyle({style: Style.Default})
+      
 
     // necessary to update height of external embedded content
     window.addEventListener('message', function(e) {

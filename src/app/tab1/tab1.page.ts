@@ -1,17 +1,17 @@
 import { Component } from '@angular/core';
 import { Router, NavigationStart } from '@angular/router';
 import { Storage } from '@ionic/storage-angular';
-import { StatusBar } from '@ionic-native/status-bar/ngx';
+import { StatusBar, Style } from '@capacitor/status-bar';
 import { AlertController } from '@ionic/angular';
 import { Platform } from '@ionic/angular';
-import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
+import { BarcodeScanner } from '@awesome-cordova-plugins/barcode-scanner/ngx';
 import { SurveyDataService } from '../services/survey-data.service';
 import { StudyTasksService } from '../services/study-tasks.service';
 import { SurveyCacheService } from '../services/survey-cache.service';
 import { UuidService } from '../services/uuid.service';
 import { LoadingService } from '../services/loading-service.service';
 import { NotificationsService } from '../services/notifications.service';
-import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
+import { LocalNotifications } from '@awesome-cordova-plugins/local-notifications/ngx';
 import * as moment from 'moment';
 import { TranslateConfigService } from '../translate-config.service';
 import {TranslateService} from '@ngx-translate/core';
@@ -66,7 +66,7 @@ export class Tab1Page {
     private uuidService : UuidService,
     private router : Router,
     private platform : Platform,
-    private statusBar : StatusBar,
+    //private statusBar : StatusBar,
     private loadingService : LoadingService,
     private alertController : AlertController,
     private localNotifications : LocalNotifications,
@@ -87,8 +87,8 @@ export class Tab1Page {
 
     ngOnInit() {
       // set statusBar to be visible on Android
-      this.statusBar.styleLightContent()
-      this.statusBar.backgroundColorByHexString('#0F2042')
+	StatusBar.show()
+	StatusBar.setStyle({ style: Style.Default })
 
 	// Need to create storage before use
 	this.storage.create()
