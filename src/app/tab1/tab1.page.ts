@@ -4,7 +4,7 @@ import { Storage } from '@ionic/storage-angular';
 import { StatusBar, Style } from '@capacitor/status-bar';
 import { AlertController } from '@ionic/angular';
 import { Platform } from '@ionic/angular';
-import { BarcodeScanner } from '@awesome-cordova-plugins/barcode-scanner/ngx';
+import { BarcodeScanner, SupportedFormat } from '@capacitor-community/barcode-scanner';
 import { SurveyDataService } from '../services/survey-data.service';
 import { StudyTasksService } from '../services/study-tasks.service';
 import { SurveyCacheService } from '../services/survey-cache.service';
@@ -58,7 +58,7 @@ export class Tab1Page {
   // the current language of the device
   selectedLanguage: string;
 
-  constructor(private barcodeScanner : BarcodeScanner,
+  constructor( //private barcodeScanner : BarcodeScanner,
     private surveyDataService : SurveyDataService,
     private notificationsService : NotificationsService,
     private surveyCacheService : SurveyCacheService,
@@ -256,16 +256,18 @@ export class Tab1Page {
   /**
    * Uses the barcode scanner to enrol in a study
    */
-  async scanBarcode() {
-    this.barcodeScanner.scan().then(barcodeData => {
-      if (!barcodeData.cancelled) {
-        this.attemptToDownloadStudy(barcodeData.text, true)
-      } 
-     }).catch(err => {
-        this.loadingService.dismiss()
+    async scanBarcode() {
+	const perms = await BarcodeScanner.checkPermission({force: true})
+	if (perms.granted) {
+	    BarcodeScanner.hideBackground()
+	    const result = await BarcodeScanner.startScan({targetedFormats: [SupportedFormat.QR_CODE]})
+	    if (result.hasContent) {
+		this.attemptToDownloadStudy(result.content, true)
+	    }
+	}
         this.displayBarcodeError()
-     });
-  }
+     }
+  
 
   /**
    * Handles the alert dialog to enrol via URL

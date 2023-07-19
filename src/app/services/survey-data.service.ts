@@ -4,7 +4,6 @@ import { Platform } from '@ionic/angular';
 import { StudyTasksService } from '../services/study-tasks.service';
 import { UuidService } from '../services/uuid.service';
 import { HttpClient } from '@angular/common/http';
-import { HTTP } from '@ionic-native/http/ngx';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +11,7 @@ import { HTTP } from '@ionic-native/http/ngx';
 export class SurveyDataService {
 
   constructor(private http: HttpClient,
-    private http2: HTTP,
+//    private http2: HTTP,
     private storage: Storage,
     private platform: Platform,
     private uuidService: UuidService,
@@ -24,13 +23,6 @@ export class SurveyDataService {
    */
     getRemoteData(surveyURL: string) {
 	return new Promise(resolve => {
-	    /*  this.http2.setRequestTimeout(7)
-		this.http2.get(surveyURL, {}, {}).then(data => {
-		resolve(data)
-		}).catch(error => {
-		resolve(error)
-		});
-		});*/
 	    this.http.get(surveyURL).subscribe({
 		next: data => {
 		    console.log("Data received: ",JSON.stringify(data))
@@ -42,8 +34,8 @@ export class SurveyDataService {
 		    resolve(error)
 		}
 	    })
-	}
-			  )}
+	})
+    }
 
     async saveToLocalStorage(key, data) {
 	this.storage.set(key, data)
