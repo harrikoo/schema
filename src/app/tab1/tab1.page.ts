@@ -11,7 +11,7 @@ import { SurveyCacheService } from '../services/survey-cache.service';
 import { UuidService } from '../services/uuid.service';
 import { LoadingService } from '../services/loading-service.service';
 import { NotificationsService } from '../services/notifications.service';
-import { LocalNotifications } from '@awesome-cordova-plugins/local-notifications/ngx';
+import { LocalNotifications } from '@capacitor/local-notifications';
 import * as moment from 'moment';
 import { TranslateConfigService } from '../translate-config.service';
 import {TranslateService} from '@ngx-translate/core';
@@ -66,10 +66,8 @@ export class Tab1Page {
     private uuidService : UuidService,
     private router : Router,
     private platform : Platform,
-    //private statusBar : StatusBar,
     private loadingService : LoadingService,
     private alertController : AlertController,
-    private localNotifications : LocalNotifications,
     private storage : Storage,
     private translateConfigService: TranslateConfigService,
     private translate: TranslateService) {
@@ -139,7 +137,7 @@ export class Tab1Page {
     ];
     this.translate.get(labels).subscribe(res => { this.translations = res; })
 
-    this.localNotifications.requestPermission()
+    LocalNotifications.requestPermissions()
 
     this.loadingService.isCaching = false
     this.loadingService.present(this.translations["label_loading"])
@@ -172,7 +170,11 @@ export class Tab1Page {
 
         // set up next round of notifications
         this.notificationsService.setNext30Notifications()
-            
+
+	  // Test notifications
+	  console.log("Setting dummy not!")
+	  this.notificationsService.scheduleDummyNotification()
+	  
         // load the study tasks
         this.loadStudyDetails()
       } else {

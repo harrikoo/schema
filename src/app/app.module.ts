@@ -14,7 +14,7 @@ import { FormsModule } from '@angular/forms';
 
 /* plugins */
 import { BarcodeScanner } from '@awesome-cordova-plugins/barcode-scanner/ngx';
-import { LocalNotifications } from '@awesome-cordova-plugins/local-notifications/ngx';
+import { LocalNotifications } from '@capacitor/local-notifications';
 import { IonicStorageModule } from '@ionic/storage-angular';
 import { HTTP } from '@ionic-native/http/ngx';
 import { FileTransfer } from '@ionic-native/file-transfer/ngx';
@@ -48,7 +48,7 @@ export function LanguageLoader(http: HttpClient) {
     providers: [
         SplashScreen,
         BarcodeScanner,
-        LocalNotifications,
+       // LocalNotifications,
         InAppBrowser,
         File,
         FileTransfer,

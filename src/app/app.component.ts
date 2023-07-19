@@ -1,5 +1,5 @@
 import { Component, OnInit, NgZone } from '@angular/core';
-import { LocalNotifications } from '@awesome-cordova-plugins/local-notifications/ngx';
+import { LocalNotifications, ActionPerformed } from '@capacitor/local-notifications';
 import { Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar, Style } from '@capacitor/status-bar';
@@ -20,7 +20,7 @@ export class AppComponent implements OnInit {
   constructor(
     private platform: Platform,
     private splashScreen: SplashScreen,
-    private localNotifications : LocalNotifications,
+      //    private localNotifications : LocalNotifications,
     private surveyDataService: SurveyDataService,
     private router : Router,
     private ngZone : NgZone,
@@ -42,22 +42,27 @@ export class AppComponent implements OnInit {
     });
 
     // handle notification click
-    this.localNotifications.on("click").subscribe(async (notification) => {
+      //this.localNotifications.on("click").subscribe(async (notification) => {
+      LocalNotifications.addListener(
+	  'localNotificationActionPerformed',
+	  async (notif_action: ActionPerformed) => {
+	      await this.isAppInForeground;
+	      console.log("Not. data: ", JSON.stringify(notif_action))
+	      let notification = notif_action.notification
+	      // log that the user clicked on this notification
+	      let logEvent = {
+		  timestamp: moment().format(),
+		  milliseconds: moment().valueOf(),
+		  page: 'notification-' + moment(notification.extra.task_time).format(),
+		  event: 'click',
+		  module_index: notification.extra.task_index
+	      };
+	      this.surveyDataService.logPageVisitToServer(logEvent);
+	      this.router.navigate(['survey/' + notification.extra.task_id]);
+	  });
+      // wait for device ready and then fire any pending click events
       await this.isAppInForeground;
-      // log that the user clicked on this notification
-      let logEvent = {
-        timestamp: moment().format(),
-        milliseconds: moment().valueOf(),
-        page: 'notification-' + moment(notification.data.task_time).format(),
-        event: 'click',
-        module_index: notification.data.task_index
-      };
-      this.surveyDataService.logPageVisitToServer(logEvent);
-      this.router.navigate(['survey/' + notification.data.task_id]);
-    });
-    // wait for device ready and then fire any pending click events
-    await this.isAppInForeground;
-    this.localNotifications.fireQueuedEvents();
+      //this.localNotifications.fireQueuedEvents();
   }
 
   initializeApp() {
