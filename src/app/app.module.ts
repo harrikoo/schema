@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
 
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
-import { SplashScreen } from '@ionic-native/splash-screen/ngx';
+import { SplashScreen } from '@capacitor/splash-screen';
 import { StatusBar, Style } from '@capacitor/status-bar';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -44,7 +44,6 @@ export function LanguageLoader(http: HttpClient) {
         })
     ],
     providers: [
-        SplashScreen,
         FormsModule,
         { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
     ],

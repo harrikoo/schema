@@ -1,7 +1,7 @@
 import { Component, OnInit, NgZone } from '@angular/core';
 import { LocalNotifications, ActionPerformed } from '@capacitor/local-notifications';
 import { Platform } from '@ionic/angular';
-import { SplashScreen } from '@ionic-native/splash-screen/ngx';
+import { SplashScreen } from '@capacitor/splash-screen';
 import { StatusBar, Style } from '@capacitor/status-bar';
 import { Router } from '@angular/router';
 import { SurveyDataService } from '../app/services/survey-data.service';
@@ -19,8 +19,6 @@ export class AppComponent implements OnInit {
 
   constructor(
     private platform: Platform,
-    private splashScreen: SplashScreen,
-      //    private localNotifications : LocalNotifications,
     private surveyDataService: SurveyDataService,
     private router : Router,
     private ngZone : NgZone,
@@ -42,7 +40,6 @@ export class AppComponent implements OnInit {
     });
 
     // handle notification click
-      //this.localNotifications.on("click").subscribe(async (notification) => {
       LocalNotifications.addListener(
 	  'localNotificationActionPerformed',
 	  async (notif_action: ActionPerformed) => {
@@ -68,7 +65,7 @@ export class AppComponent implements OnInit {
   initializeApp() {
     this.platform.ready().then(() => {
       StatusBar.show();
-      this.splashScreen.hide();
+      SplashScreen.hide();
     });
   }
 }
