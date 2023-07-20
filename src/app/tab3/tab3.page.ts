@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { Storage } from '@ionic/storage-angular';
 import { NavController, AlertController } from '@ionic/angular';
 import { NotificationsService } from '../services/notifications.service';
-import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
+import { Browser } from '@capacitor/browser';
 import * as moment from 'moment';
 import { TranslateConfigService } from '../translate-config.service';
 import { SurveyDataService } from '../services/survey-data.service';
@@ -41,17 +41,16 @@ export class Tab3Page {
 
 
   constructor(private storage: Storage,
-    private navController: NavController,
-    private alertController: AlertController,
-    private iab: InAppBrowser,
-    private notificsationsService: NotificationsService,
-    private translateConfigService: TranslateConfigService,
-    private surveyDataService: SurveyDataService) {
+	      private navController: NavController,
+	      private alertController: AlertController,
+	      private notificsationsService: NotificationsService,
+	      private translateConfigService: TranslateConfigService,
+	      private surveyDataService: SurveyDataService) {
       // get the default language of the device
       this.selectedLanguage = this.translateConfigService.getDefaultLanguage();
-    }
+  }
 
-  ionViewWillEnter() {
+    ionViewWillEnter() {
 
     this.isEnrolled = false;
 
@@ -158,9 +157,8 @@ export class Tab3Page {
    * Opens the support website for the current study in a web browser
    * @param support_url The current study's support website URL
    */
-  openSupportURL(support_url) {
-    //window.location.href = support_url;
-    const browser = this.iab.create(support_url, "_system")
+  openSupportURL = async (support_url) => {
+      const site = await Browser.open({url: support_url})
   }
 
   /**

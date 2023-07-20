@@ -18,7 +18,7 @@ import { LocalNotifications } from '@capacitor/local-notifications';
 import { IonicStorageModule } from '@ionic/storage-angular';
 import { FileTransfer } from '@ionic-native/file-transfer/ngx';
 import { File } from '@ionic-native/file/ngx';
-import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
+import { Browser } from '@capacitor/browser';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
@@ -46,7 +46,6 @@ export function LanguageLoader(http: HttpClient) {
     ],
     providers: [
         SplashScreen,
-        InAppBrowser,
         File,
         FileTransfer,
         FormsModule,

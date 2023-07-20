@@ -6,7 +6,7 @@ import { StatusBar, Style } from '@capacitor/status-bar';
 import { StudyTasksService } from '../services/study-tasks.service';
 import { SurveyDataService } from '../services/survey-data.service';
 import { NavController, IonContent, ToastController } from '@ionic/angular';
-import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
+import { Browser } from '@capacitor/browser';
 import * as moment from 'moment';
 
 @Component({
@@ -49,14 +49,13 @@ export class SurveyPage implements OnInit {
 
   constructor(private route: ActivatedRoute,
     private storage: Storage,
-	      //    private statusBar: StatusBar,
     private domSanitizer: DomSanitizer,
     private navController: NavController,
     private studyTasksService: StudyTasksService,
     private surveyDataService: SurveyDataService,
     private toastController: ToastController,
-    private ngZone: NgZone,
-    private iab: InAppBrowser) { }
+    private ngZone: NgZone
+	     ) { }
 
   /**
    * Triggered when the survey page is first opened
@@ -364,7 +363,7 @@ export class SurveyPage implements OnInit {
    * @param url The url of the PDF file to open
    */
   openExternalFile(url) {
-    const browser = this.iab.create(url, "_system")
+      const browser = Browser.open({url: url})
   }
 
   toggleDynamicQuestions(question) {
