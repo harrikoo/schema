@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
-import { FileTransfer, FileTransferObject } from '@ionic-native/file-transfer/ngx';
 import { LoadingService } from '../services/loading-service.service';
-import { File } from '@ionic-native/file/ngx';
+import { Filesystem, Directory } from '@capacitor/filesystem';
 import { Storage } from '@ionic/storage';
 
 @Injectable({
@@ -18,8 +17,7 @@ export class SurveyCacheService {
   mediaCount:number = 0
   mediaDownloadedCount:number = 0
 
-  constructor(private fileTransfer: FileTransfer,
-    private file: File,
+    constructor(
     private storage: Storage,
     private loadingService: LoadingService) { }
 
@@ -28,19 +26,17 @@ export class SurveyCacheService {
    * Downloads a remote file and converts it to a local URL
    * @param url Remote URL to a media file
    */
-  downloadFile(url) {
-    const transfer: FileTransferObject = this.fileTransfer.create()
+    downloadFile(url) {
+	const urlSplit = url.split("/")
+	const fileName = urlSplit[urlSplit.length - 1]
 
-    // get the fileName from the URL
-    const urlSplit = url.split("/")
-    const fileName = urlSplit[urlSplit.length - 1]
-
-    return transfer.download(url, this.file.dataDirectory + fileName).then((entry) => {
-      return entry.toURL()
-    }, (error) => {
-      return ""
-    })
-  }
+	return Filesystem.downloadFile({url: url, path: fileName, directory: Directory.Data}).then(
+	    (dlres) => {
+		const path = dlres.path
+		const resurl = Filesystem.getUri({path: path, directory: Directory.Data})
+		return resurl
+	    })
+    }
 
   /**
    * Gets all of the remote URLs from the media elements in this study

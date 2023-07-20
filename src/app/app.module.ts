@@ -16,8 +16,7 @@ import { FormsModule } from '@angular/forms';
 import { BarcodeScanner } from '@capacitor-community/barcode-scanner';
 import { LocalNotifications } from '@capacitor/local-notifications';
 import { IonicStorageModule } from '@ionic/storage-angular';
-import { FileTransfer } from '@ionic-native/file-transfer/ngx';
-import { File } from '@ionic-native/file/ngx';
+import { Filesystem } from '@capacitor/filesystem';
 import { Browser } from '@capacitor/browser';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
@@ -46,8 +45,6 @@ export function LanguageLoader(http: HttpClient) {
     ],
     providers: [
         SplashScreen,
-        File,
-        FileTransfer,
         FormsModule,
         { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
     ],
