@@ -54,6 +54,7 @@ export class NotificationsService {
 	    extra: { task_index: task.index, task_id: task.task_id, task_time: task.time }
 	}
 	let res = LocalNotifications.schedule({notifications: [not]})
+	console.log("Scheduled: ",JSON.stringify(res))
 	// let nots = LocalNotifications.getPending()
   //   this.localNotifications.schedule({
   //     id: task.task_id,
@@ -91,12 +92,13 @@ export class NotificationsService {
 
 	    if (notificationsEnabled) {
 		const tasks = await this.storage.get('study-tasks')
+		console.log("Notif. Tasks:",JSON.stringify(tasks))
 		if (tasks !== null) {
 		    var alertCount = 0
 		    for (var i = 0; i < tasks.length; i++) {
 			var task = tasks[i]
 			var alertTime = new Date(Date.parse(task.time))
-			
+			console.log("Notif. parsed time",JSON.stringify(alertTime))
 			if (alertTime > new Date()) {
 			    if (this.checkTaskIsUnlocked(task, tasks)) {
 				this.scheduleNotification(task)
