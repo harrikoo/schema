@@ -5,3 +5,7 @@ Currently donot work. Solution: need to request/grant permissions. See https://f
 Need to check for persmissions at app start, and request if not granted. Check for permissions too before setting local notifications.
 * TODO Camera permissions
 Need to be set for Andrdoid. Check how work for iOS.
+* TODO Graph creation does not work
+* TODO Translations on iOS
+Currently shows the placeholder texts
+
