@@ -1,0 +1,7 @@
+TODO list
+* TODO LocalNotifications on ios
+Currently donot work. Solution: need to request/grant permissions. See https://forum.ionicframework.com/t/local-notifications-capacitor-react-do-not-trigger-on-ios/223408
+
+Need to check for persmissions at app start, and request if not granted. Check for permissions too before setting local notifications.
+* TODO Camera permissions
+Need to be set for Andrdoid. Check how work for iOS.
